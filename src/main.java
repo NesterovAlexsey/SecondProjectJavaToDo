@@ -1,6 +1,8 @@
 package src;
 
 public class main {
-  // просто коммент
-  // dsyda
+  public static void main(String[] args) {
+    System.out.print("Hello");
   }
+  // просто коммент
+}
