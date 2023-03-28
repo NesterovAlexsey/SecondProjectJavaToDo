@@ -1,5 +1,6 @@
 package src;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,4 +25,22 @@ public class Main {
     commands.put(Command.EXPORT_LIST, "Экспортировать запись");
     commands.put(Command.EXIT, "ВЫХОД");
   }
+  public static void main(String[] args) throws IOException {
+    ToDoList currentToDoList = new ToDoList();
+
+    Command command = readCommand();
+    while (command != Command.EXIT) {
+      switch (command) {
+        case HELP -> (); // TODO
+        case NEW_LIST -> (); // TODO
+        case CHECK_LIST -> (); // TODO
+        case CORRECT_LIST -> (); // TODO
+        case SORT_LIST -> (); // TODO
+        case EXPORT_LIST -> (); // TODO
+      }
+      command = readCommand();
+    }
+    System.out.println("До свиданья!");
+  }
+
 }
