@@ -1,13 +1,14 @@
 package src;
 
-import java.io.IOException;
-
 public class Main {
 
   enum Command {
     HELP, //помощь
-    ADD, // добавить товар (строку) в чек
-    REPORT, // вывести отчёт
+    NEW_LIST, // добавить
+    CHECK_LIST, // вывести
+    CORRECT_LIST, // править
+    SORT_LIST, // сортировать
+    EXPORT_LIST, // экспорт
     EXIT, // выход из программы
   }
 
@@ -17,12 +18,12 @@ public class Main {
 //    Command command = readCommand();
 //    while (command != Command.EXIT) { // основной рабочий цикл программы, обрабатывающий команды
 //      switch (command) {
-//        case ADD -> {
+//        case NEW_LIST -> {
 //          ReceiptLine line = ReceiptLine.readReceiptLine();
 //          cashRegister.addLine(line);
 //        }
 //        case NEW -> cashRegister.newReceipt();
-//        case REPORT -> cashRegister.printReport();
+//        case CHECK_LIST -> cashRegister.printReport();
 //      }
 //      command = readCommand(); // команда EXIT просто завершит цикл
 //    }
