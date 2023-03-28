@@ -15,7 +15,9 @@ public class Main {
     EXPORT_LIST, // экспорт
     EXIT, // выход из программы
   }
+
   private static final Map<Command, String> commands = new HashMap<>();
+
   static {
     commands.put(Command.HELP, "Список команд");
     commands.put(Command.NEW_LIST, "Новая запись");
@@ -25,6 +27,7 @@ public class Main {
     commands.put(Command.EXPORT_LIST, "Экспортировать запись");
     commands.put(Command.EXIT, "ВЫХОД");
   }
+
   public static void main(String[] args) throws IOException {
     ToDoList currentToDoList = new ToDoList();
 
@@ -41,6 +44,14 @@ public class Main {
       command = readCommand();
     }
     System.out.println("До свиданья!");
+  }
+
+  public static void printMenu() {
+    System.out.println();
+    System.out.println("Список Команд: ");
+    for (Command command : commands.keySet()) {
+      System.out.printf("- %s: %s%n", command, commands.get(command));
+    }
   }
 
 }
