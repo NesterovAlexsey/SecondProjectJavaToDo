@@ -5,7 +5,7 @@ import java.io.IOException;
 public class Main {
 
   enum Command {
-    NEW, // закрытие чека должно открыть следующий
+    HELP, //помощь
     ADD, // добавить товар (строку) в чек
     REPORT, // вывести отчёт
     EXIT, // выход из программы
