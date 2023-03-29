@@ -32,9 +32,13 @@ public class Main {
 
   public static RegularTask createRegularTask() throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    System.out.println("Введите номер задачи:");
     int taskId = Integer.parseInt(br.readLine());
+    System.out.println("Введите количество часов: ");
     int hours = Integer.parseInt(br.readLine());
+    System.out.println("Введите количество минут:");
     int minutes = Integer.parseInt(br.readLine());
+    System.out.println("Введите название:");
     String taskTitle = br.readLine();
 
     return new RegularTask(taskId, hours, minutes, taskTitle);
