@@ -30,11 +30,12 @@ public class Main {
     commands.put(Command.EXIT, "ВЫХОД");
   }
 
-  public static RegularTask createRegularTask() {
-    int taskId = readTaskId();
-    int hours = readHours();
-    int minutes = readMinutes();
-    String taskTitle = readTaskTitle();
+  public static RegularTask createRegularTask() throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int taskId = Integer.parseInt(br.readLine());
+    int hours = Integer.parseInt(br.readLine());
+    int minutes = Integer.parseInt(br.readLine());
+    String taskTitle = br.readLine();
 
     return new RegularTask(taskId, hours, minutes, taskTitle);
   }
