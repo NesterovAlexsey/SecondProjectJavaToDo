@@ -18,11 +18,14 @@ public class ToDoList {
   }
 
   public void checkList() { //показать экран
-
-    for (Map.Entry<Integer, Test> paar : current.entrySet()) {
-      System.out.println(paar.getValue()); //todo дописать сортировку для вывода по порядку
-    }
+    List<Map.Entry<Integer, Test>> listOfTaskWithId = new ArrayList<>();
+    //      System.out.println(paar.getValue()); //todo дописать сортировку для вывода по порядку
+    listOfTaskWithId.addAll(current.entrySet());
+    listOfTaskWithId.sort(new idComparator());
+    System.out.println(listOfTaskWithId);
   }
+
+//  private Test
 
   public void correctTask() throws IOException { //корректировать задачу
     BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
