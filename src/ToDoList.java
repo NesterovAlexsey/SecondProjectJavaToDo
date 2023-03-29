@@ -11,14 +11,14 @@ import java.util.Map;
 
 public class ToDoList {
 
-  private final Map<Integer, Test> current = new HashMap<>();
+  private final Map<Integer, RegularTask> current = new HashMap<>();
 
-  public void newTask(Test task) { //добавить задачу в текущий список дел
-    current.put(task.getId(), task);
+  public void newTask(RegularTask task) { //добавить задачу в текущий список дел
+    current.put(task.getTaskId(), task);
   }
 
   public void checkList() { //показать экран
-    List<Map.Entry<Integer, Test>> listOfTaskWithId = new ArrayList<>();
+    List<Map.Entry<Integer, RegularTask>> listOfTaskWithId = new ArrayList<>();
 
     listOfTaskWithId.addAll(current.entrySet());
     listOfTaskWithId.sort(new idComparator());
@@ -26,9 +26,9 @@ public class ToDoList {
     printToDoList(listOfTaskWithId);
   }
 
-  private void printToDoList(List<Map.Entry<Integer, Test>> listOfTaskWithId) {
-    for (Map.Entry<Integer, Test> paar : listOfTaskWithId) {
-      Test temp = paar.getValue();
+  private void printToDoList(List<Map.Entry<Integer, RegularTask>> listOfTaskWithId) {
+    for (Map.Entry<Integer, RegularTask> paar : listOfTaskWithId) {
+      RegularTask temp = paar.getValue();
       System.out.println(temp);
     }
   }
@@ -46,8 +46,7 @@ public class ToDoList {
       case ("title"):
         System.out.print("Please, enter new title:");
         String newTitle = read.readLine();
-        current.get(id).setTaskName(newTitle);
-
+        current.get(id).setTaskTitle(newTitle);
     }
   }
 
@@ -59,10 +58,10 @@ public class ToDoList {
     //todo записать дату в файл, записать мапу в нужном формате, закрыть файл
     FileWriter ToDoList = new FileWriter("res/ToDoList.txt", true);
 
-    for (Map.Entry<Integer, Test> paar : current.entrySet()) {
+    for (Map.Entry<Integer, RegularTask> paar : current.entrySet()) {
 
-      String forPrint = paar.getValue().getId() + " " + paar.getValue().getTaskName() + " " +
-          paar.getValue().getTaskTime() + "\n";
+      String forPrint = paar.getValue().getTaskId() + " " + paar.getValue().getTaskTitle() + " " +
+          paar.getValue().getTaskType() + "\n";
 
       ToDoList.write(forPrint);
 
