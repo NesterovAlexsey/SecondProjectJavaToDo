@@ -9,25 +9,41 @@ import java.util.Map;
 public class Main {
 
   enum Command {
-    HELP, //помощь
-    NEW_LIST, // добавить
-    CHECK_LIST, // вывести
-    CORRECT_LIST, // править
-    SORT_LIST, // сортировать
-    EXPORT_LIST, // экспорт
-    EXIT, // выход из программы
+    HELP(9), //помощь
+    NEW_LIST(1), // добавить
+    CHECK_LIST(2), // вывести
+    CORRECT_LIST(3), // править
+    SORT_LIST(4), // сортировать
+    EXPORT_LIST(5), // экспорт
+    EXIT(0); // выход из программы
+    private final int number;
+    Command(int number) {
+      this.number = number;
+    }
+
+    public int getNumber() {
+      return number;
+    }
+    public static Command fromNumber(int number) {
+      for (Command command : Command.values()) {
+        if (command.getNumber() == number) {
+          return command;
+        }
+      }
+      throw new IllegalArgumentException("Команды с номером [" + number + "] не существует");
+    }
   }
 
   private static final Map<Command, String> commands = new HashMap<>();
 
   static {
-    commands.put(Command.HELP, "Список команд");
-    commands.put(Command.NEW_LIST, "Новая запись");
-    commands.put(Command.CHECK_LIST, "Проверить запись");
-    commands.put(Command.CORRECT_LIST, "Править запись");
-    commands.put(Command.SORT_LIST, "Сортировать записи");
-    commands.put(Command.EXPORT_LIST, "Экспортировать запись");
-    commands.put(Command.EXIT, "ВЫХОД");
+    commands.put(Command.HELP, "[9] Список команд");
+    commands.put(Command.NEW_LIST, "[1] Новая запись");
+    commands.put(Command.CHECK_LIST, "[2] Проверить запись");
+    commands.put(Command.CORRECT_LIST, "[3] Править запись");
+    commands.put(Command.SORT_LIST, "[4] Сортировать записи");
+    commands.put(Command.EXPORT_LIST, "[5] Экспортировать запись");
+    commands.put(Command.EXIT, "[0] ВЫХОД");
   }
 
   public static RegularTask createRegularTask() throws IOException {
@@ -103,7 +119,7 @@ public class Main {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     printMenu();
-    System.out.println("Введите команду: ");
+    System.out.println("Введите номер команды: ");
     String command = br.readLine().toUpperCase();
 
     Command result = null;
