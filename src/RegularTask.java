@@ -8,8 +8,6 @@ public class RegularTask  {
   private final int minutes;
   private String taskTitle;
   private Type taskType;
-  //private Type taskType;
-
   public RegularTask(int taskId, int hours, int minutes, String taskTitle, Type taskType) {
     this.taskId = taskId;
     this.hours = hours;
