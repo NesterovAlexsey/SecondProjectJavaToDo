@@ -88,13 +88,13 @@ public class ToDoList {
   private void changeHoursInTask(Integer id, BufferedReader read) throws IOException {
     System.out.print("Please, enter new hours:");
     int temp = Integer.parseInt(read.readLine());
-    current.get(id).setTaskHours(temp);
+    current.get(id).setHours(temp);
   }
 
   private void changeMinutesInTask(Integer id, BufferedReader read) throws IOException {
     System.out.print("Please, enter new minutes:");
     int temp = Integer.parseInt(read.readLine());
-    current.get(id).setTaskMinutes(temp);
+    current.get(id).setMinutes(temp);
   }
 
   private void deleteTask(int id) {
