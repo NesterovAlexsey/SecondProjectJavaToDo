@@ -36,22 +36,35 @@ public class Main {
     int hours = 0;
     int minutes = 0;
     String taskTitle = null;
-    try {
-      System.out.println("Введите номер задачи:");
-      taskId = Integer.parseInt(br.readLine());
-      if (taskId < 0) throw new IllegalArgumentException("Номер задачи должен быть положительным!");
-      System.out.println("Введите количество часов: ");
-      hours = Integer.parseInt(br.readLine());
-      if (hours < 0) throw new IllegalArgumentException("Кол-во часов должно быть положительным");
-      System.out.println("Введите количество минут:");
-      minutes = Integer.parseInt(br.readLine());
-      if (minutes < 0) throw new IllegalArgumentException("Кол-во минут должно быть положительным");
-      System.out.println("Введите название:");
-      taskTitle = br.readLine();
+    boolean validInput = false;
+    while (!validInput) {
+      try {
+        System.out.println("Введите номер задачи:");
+        taskId = Integer.parseInt(br.readLine());
+        if (taskId < 0) {
+          throw new IllegalArgumentException("Номер задачи должен быть положительным!"
+          + "Вы ввели [" + taskId + "]");
+        }
+        System.out.println("Введите количество часов: ");
+        hours = Integer.parseInt(br.readLine());
+        if (hours < 0) {
+          throw new IllegalArgumentException("Кол-во часов должно быть положительным!"
+                  + "Вы ввели [" + hours + "]");
+        }
+        System.out.println("Введите количество минут:");
+        minutes = Integer.parseInt(br.readLine());
+        if (minutes < 0) {
+          throw new IllegalArgumentException("Кол-во минут должно быть положительным!"
+                  + "Вы ввели [" + minutes + "]");
+        }
+        System.out.println("Введите название:");
+        taskTitle = br.readLine();
 
-    } catch (IllegalArgumentException e) {
-      System.out.println("Ошибка: " + e.getMessage());
-      System.out.println("Введите данные корректно!");
+        validInput = true;
+      } catch (IllegalArgumentException e) {
+        System.out.println("Ошибка: " + e.getMessage());
+        System.out.println("Введите данные корректно!");
+      }
     }
 
     return new RegularTask(taskId, hours, minutes, taskTitle);
@@ -71,7 +84,7 @@ public class Main {
         case CHECK_LIST -> currentToDoList.checkList();
         case CORRECT_LIST -> currentToDoList.correctTask();
         case SORT_LIST -> currentToDoList.sortTasks();
-        case EXPORT_LIST -> currentToDoList.exportTaskList ();
+        case EXPORT_LIST -> currentToDoList.exportTaskList();
       }
       command = readCommand();
     }
