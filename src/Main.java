@@ -127,8 +127,16 @@ public class Main {
       try {
         int command = Integer.parseInt(commandInput);
         result = Command.fromNumber(command);
+      }catch (NumberFormatException e) {
+        try {
+          result = Command.valueOf(commandInput);
+        } catch (IllegalArgumentException exception) {
+          System.out.println("Некорректная команда: " + commandInput);
+        }
       } catch (IllegalArgumentException e) {
         System.out.println("Некорректная команда: " + commandInput);
+      }
+      if (result == null) {
         System.out.println("Введите корректную команду: ");
         commandInput = br.readLine().toUpperCase();
       }
