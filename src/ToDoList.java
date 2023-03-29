@@ -18,14 +18,13 @@ public class ToDoList {
   }
 
   public void checkList() { //показать экран
+
     for (Map.Entry<Integer, Test> paar : current.entrySet()) {
       System.out.println(paar.getValue()); //todo дописать сортировку для вывода по порядку
     }
   }
 
-  //откорректировать задачу по id, должен получать номер задачи, коммуникация с пользователем
-  // должна быть через мейн?
-  public void correctTask() throws IOException {
+  public void correctTask() throws IOException { //корректировать задачу
     BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
 
     System.out.print("Please, enter the task number:");
@@ -43,11 +42,11 @@ public class ToDoList {
     }
   }
 
-  public void sortTasks() {
+  public void sortTasks() { //сортировать задачи
     //Todo создать отдельный Comparator, здесь вызвать
   }
 
-  public void exportTaskList() throws IOException {
+  public void exportTaskList() throws IOException { // экспортировать задачи в файл
     //todo записать дату в файл, записать мапу в нужном формате, закрыть файл
     FileWriter ToDoList = new FileWriter("res/ToDoList.txt", true);
 
