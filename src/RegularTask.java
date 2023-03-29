@@ -7,13 +7,12 @@ public class RegularTask  {
   private final int hours;
   private final int minutes;
   private String taskTitle;
-  private Type taskType;
-  public RegularTask(int taskId, int hours, int minutes, String taskTitle, Type taskType) {
+  //private Type taskType;
+  public RegularTask(int taskId, int hours, int minutes, String taskTitle) {
     this.taskId = taskId;
     this.hours = hours;
     this.minutes = minutes;
     this.taskTitle = taskTitle;
-    this.taskType = taskType;
   }
 
   public int getTaskId() {
@@ -32,14 +31,10 @@ public class RegularTask  {
     return taskTitle;
   }
 
-  public Type getTaskType() {
-    return taskType;
-  }
-
   @Override
   public String toString() {
     return "Task " + taskId + " - " + taskTitle + " (" + hours + "h " + minutes + "m) " +
-            "[" + taskType + "]";
+            "[" + "]";
   }
 
   public void setTaskHours
@@ -51,9 +46,5 @@ public class RegularTask  {
 
   public void setTaskTitle(String taskTitle) {
     this.taskTitle = taskTitle;
-  }
-
-  public void setTaskType(Type taskType) {
-    this.taskType = taskType;
   }
 }
