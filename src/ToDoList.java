@@ -41,4 +41,12 @@ public class ToDoList {
 
     }
   }
+
+  public void sortTasks() {
+    //Todo создать отдельный Comparator, здесь вызвать
+  }
+
+  public void exportTaskList() {
+    //todo открыть файл, записать туда дату, записать мапу в нужном формате, закрыть файл
+  }
 }
