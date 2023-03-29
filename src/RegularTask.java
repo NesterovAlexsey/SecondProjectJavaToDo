@@ -1,13 +1,12 @@
 package src;
 
-import java.lang.reflect.Type;
+import java.time.LocalDate;
 
 public class RegularTask  {
   private final int taskId;
   private final int hours;
   private final int minutes;
   private String taskTitle;
-  //private Type taskType;
   public RegularTask(int taskId, int hours, int minutes, String taskTitle) {
     this.taskId = taskId;
     this.hours = hours;
@@ -33,10 +32,8 @@ public class RegularTask  {
 
   @Override
   public String toString() {
-    return "Task " + taskId + " - " + taskTitle + " (" + hours + "h " + minutes + "m) " +
-            "[" + "]";
+    return "Task " + taskId + " - " + taskTitle + " (" + hours + "h " + minutes + "m)";
   }
-
   public void setTaskHours
           (int taskHours) {
   }
