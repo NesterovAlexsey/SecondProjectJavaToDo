@@ -1,6 +1,8 @@
 package src;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,7 +36,7 @@ public class Main {
     Command command = readCommand();
     while (command != Command.EXIT) {
       switch (command) {
-        case HELP -> (); // TODO
+        case HELP -> printMenu(); // TODO
         case NEW_LIST -> (); // TODO
         case CHECK_LIST -> (); // TODO
         case CORRECT_LIST -> (); // TODO
@@ -54,4 +56,25 @@ public class Main {
     }
   }
 
+  public static Command readCommand() throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    printMenu();
+    System.out.println("Введите команду: ");
+    String command = br.readLine().toUpperCase();
+
+    Command result = null;
+    while (result == null) {
+      try {
+        result = Command.valueOf(command);
+      } catch (IllegalArgumentException e) {
+        System.out.println("Некорректная команда: " + command);
+        System.out.println("Введите корректную команду: ");
+        command = br.readLine().toUpperCase();
+      }
+    }
+
+    System.out.println();
+    return result;
+  }
 }
