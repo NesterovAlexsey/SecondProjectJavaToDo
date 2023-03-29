@@ -120,16 +120,17 @@ public class Main {
 
     printMenu();
     System.out.println("Введите номер команды: ");
-    String command = br.readLine().toUpperCase();
+    String commandInput = br.readLine().toUpperCase();
 
     Command result = null;
     while (result == null) {
       try {
-        result = Command.valueOf(command);
+        int command = Integer.parseInt(commandInput);
+        result = Command.fromNumber(command);
       } catch (IllegalArgumentException e) {
-        System.out.println("Некорректная команда: " + command);
+        System.out.println("Некорректная команда: " + commandInput);
         System.out.println("Введите корректную команду: ");
-        command = br.readLine().toUpperCase();
+        commandInput = br.readLine().toUpperCase();
       }
     }
 
