@@ -11,6 +11,8 @@ import java.util.Map;
 
 public class ToDoList {
 
+
+
   private final Map<Integer, RegularTask> current = new HashMap<>();
 
   public void newTask(RegularTask task) { //добавить задачу в текущий список дел
@@ -61,7 +63,7 @@ public class ToDoList {
     for (Map.Entry<Integer, RegularTask> paar : current.entrySet()) {
 
       String forPrint = paar.getValue().getTaskId() + " " + paar.getValue().getTaskTitle() + " " +
-          paar.getValue().getTaskType() + "\n";
+          paar.getValue().getHours() + "h, " + paar.getValue().getMinutes() + "min.\n";
 
       ToDoList.write(forPrint);
 
