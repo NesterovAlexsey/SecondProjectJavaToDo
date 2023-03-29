@@ -37,11 +37,15 @@ public class Main {
     while (command != Command.EXIT) {
       switch (command) {
         case HELP -> printMenu(); // TODO
-        case NEW_LIST -> (); // TODO
-        case CHECK_LIST -> (); // TODO
-        case CORRECT_LIST -> (); // TODO
-        case SORT_LIST -> (); // TODO
-        case EXPORT_LIST -> (); // TODO
+        case NEW_LIST -> {
+          RegularTask testTask = new RegularTask(1,3,4, "Пробный таск");
+          currentToDoList.newTask(testTask);
+
+        } // TODO newTask (передать объект класса таск)
+        case CHECK_LIST -> currentToDoList.checkList(); // TODO checkList
+        case CORRECT_LIST -> currentToDoList.correctTask(); // TODO correctTask
+        case SORT_LIST -> currentToDoList.sortTasks(); // TODO sortTasks
+        case EXPORT_LIST -> currentToDoList.exportTaskList (); // TODO exportTaskList
       }
       command = readCommand();
     }
