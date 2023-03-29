@@ -1,12 +1,10 @@
 package src;
-
-import java.time.LocalDate;
-
-public class RegularTask  {
+public class RegularTask {
   private final int taskId;
-  private final int hours;
-  private final int minutes;
+  private int hours;
+  private  int minutes;
   private String taskTitle;
+
   public RegularTask(int taskId, int hours, int minutes, String taskTitle) {
     this.taskId = taskId;
     this.hours = hours;
@@ -22,26 +20,28 @@ public class RegularTask  {
     return hours;
   }
 
+  public void setHours(int hours) {
+    this.hours = hours;
+  }
+
   public int getMinutes() {
     return minutes;
+  }
+
+  public void setMinutes(int minutes) {
+    this.minutes = minutes;
   }
 
   public String getTaskTitle() {
     return taskTitle;
   }
 
+  public void setTaskTitle(String taskTitle) {
+    this.taskTitle = taskTitle;
+  }
+
   @Override
   public String toString() {
     return "Task " + taskId + " - " + taskTitle + " (" + hours + "h " + minutes + "m)";
-  }
-  public void setTaskHours
-          (int taskHours) {
-  }
-
-  public void setTaskMinutes(int taskMinutes) {
-  }
-
-  public void setTaskTitle(String taskTitle) {
-    this.taskTitle = taskTitle;
   }
 }
