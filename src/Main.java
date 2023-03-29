@@ -32,14 +32,27 @@ public class Main {
 
   public static RegularTask createRegularTask() throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    System.out.println("Введите номер задачи:");
-    int taskId = Integer.parseInt(br.readLine());
-    System.out.println("Введите количество часов: ");
-    int hours = Integer.parseInt(br.readLine());
-    System.out.println("Введите количество минут:");
-    int minutes = Integer.parseInt(br.readLine());
-    System.out.println("Введите название:");
-    String taskTitle = br.readLine();
+    int taskId = 0;
+    int hours = 0;
+    int minutes = 0;
+    String taskTitle = null;
+    try {
+      System.out.println("Введите номер задачи:");
+      taskId = Integer.parseInt(br.readLine());
+      if (taskId < 0) throw new IllegalArgumentException("Номер задачи должен быть положительным!");
+      System.out.println("Введите количество часов: ");
+      hours = Integer.parseInt(br.readLine());
+      if (hours < 0) throw new IllegalArgumentException("Кол-во часов должно быть положительным");
+      System.out.println("Введите количество минут:");
+      minutes = Integer.parseInt(br.readLine());
+      if (minutes < 0) throw new IllegalArgumentException("Кол-во минут должно быть положительным");
+      System.out.println("Введите название:");
+      taskTitle = br.readLine();
+
+    } catch (IllegalArgumentException e) {
+      System.out.println("Ошибка: " + e.getMessage());
+      System.out.println("Введите данные корректно!");
+    }
 
     return new RegularTask(taskId, hours, minutes, taskTitle);
   }
