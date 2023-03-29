@@ -30,22 +30,30 @@ public class Main {
     commands.put(Command.EXIT, "ВЫХОД");
   }
 
+  public static RegularTask createRegularTask() {
+    int taskId = readTaskId();
+    int hours = readHours();
+    int minutes = readMinutes();
+    String taskTitle = readTaskTitle();
+
+    return new RegularTask(taskId, hours, minutes, taskTitle);
+  }
+
   public static void main(String[] args) throws IOException {
     ToDoList currentToDoList = new ToDoList();
 
     Command command = readCommand();
     while (command != Command.EXIT) {
       switch (command) {
-        case HELP -> printMenu(); // TODO
+        case HELP -> printMenu();
         case NEW_LIST -> {
-          RegularTask testTask = new RegularTask(1,3,4, "Пробный таск");
+          RegularTask testTask = createRegularTask();
           currentToDoList.newTask(testTask);
-
-        } // TODO newTask (передать объект класса таск)
-        case CHECK_LIST -> currentToDoList.checkList(); // TODO checkList
-        case CORRECT_LIST -> currentToDoList.correctTask(); // TODO correctTask
-        case SORT_LIST -> currentToDoList.sortTasks(); // TODO sortTasks
-        case EXPORT_LIST -> currentToDoList.exportTaskList (); // TODO exportTaskList
+        }
+        case CHECK_LIST -> currentToDoList.checkList();
+        case CORRECT_LIST -> currentToDoList.correctTask();
+        case SORT_LIST -> currentToDoList.sortTasks();
+        case EXPORT_LIST -> currentToDoList.exportTaskList ();
       }
       command = readCommand();
     }
