@@ -1,6 +1,7 @@
 package src;
 
 import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -46,7 +47,18 @@ public class ToDoList {
     //Todo создать отдельный Comparator, здесь вызвать
   }
 
-  public void exportTaskList() {
-    //todo открыть файл, записать туда дату, записать мапу в нужном формате, закрыть файл
+  public void exportTaskList() throws IOException {
+    //todo записать дату в файл, записать мапу в нужном формате, закрыть файл
+    FileWriter ToDoList = new FileWriter("res/ToDoList.txt", true);
+
+    for (Map.Entry<Integer, Test> paar : current.entrySet()) {
+
+      String forPrint = paar.getValue().getId() + " " + paar.getValue().getTaskName() + " " +
+          paar.getValue().getTaskTime() + "\n";
+
+      ToDoList.write(forPrint);
+
+    }
+    ToDoList.close();
   }
 }
