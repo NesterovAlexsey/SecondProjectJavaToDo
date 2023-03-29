@@ -17,6 +17,7 @@ public class Main {
     EXPORT_LIST(5), // экспорт
     EXIT(0); // выход из программы
     private final int number;
+
     Command(int number) {
       this.number = number;
     }
@@ -24,6 +25,7 @@ public class Main {
     public int getNumber() {
       return number;
     }
+
     public static Command fromNumber(int number) {
       for (Command command : Command.values()) {
         if (command.getNumber() == number) {
@@ -59,7 +61,7 @@ public class Main {
         taskId = Integer.parseInt(br.readLine());
         if (taskId < 0) {
           throw new IllegalArgumentException("Номер задачи должен быть положительным!"
-          + "Вы ввели [" + taskId + "]");
+                  + "Вы ввели [" + taskId + "]");
         }
         System.out.println("Введите количество часов: ");
         hours = Integer.parseInt(br.readLine());
@@ -119,7 +121,7 @@ public class Main {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     printMenu();
-    System.out.println("Введите номер команды: ");
+    System.out.println("Введите название или номер команды: ");
     String commandInput = br.readLine().toUpperCase();
 
     Command result = null;
@@ -127,7 +129,7 @@ public class Main {
       try {
         int command = Integer.parseInt(commandInput);
         result = Command.fromNumber(command);
-      }catch (NumberFormatException e) {
+      } catch (NumberFormatException e) {
         try {
           result = Command.valueOf(commandInput);
         } catch (IllegalArgumentException exception) {
