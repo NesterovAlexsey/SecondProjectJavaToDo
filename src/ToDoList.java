@@ -55,18 +55,17 @@ public class ToDoList {
   }
 
   private void printToDoList(List<Map.Entry<Integer, RegularTask>> listOfTaskWithId) {
+    System.out.println("");
+    System.out.println("======= My ToDo List ======");
     for (Map.Entry<Integer, RegularTask> paar : listOfTaskWithId) {
       RegularTask temp = paar.getValue();
       System.out.println(temp);
     }
+    System.out.println("");
   }
 
-  //метод, вызываемыйе в мейн, корректировка задачи
-  //todo доделать
-  public void correctTask() throws IOException { //корректировать задачу
-    BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
-
-    System.out.print("Please, enter the task number:");
+  private int getIdFromUser(BufferedReader read) throws IOException {
+    System.out.print("Please, enter the task number: ");
 
     int id = 0;
     try {
@@ -74,12 +73,22 @@ public class ToDoList {
     } catch (NumberFormatException e) {
       System.err.println("Incorrect id number, should be Integer! " + e);
     }
+
     if (!current.containsKey(id)) {
       throw new IllegalArgumentException("There is NO task with such id");
     }
 
+    return id;
+  }
+
+  //метод, вызываемыйе в мейн, корректировка задачи
+  public void correctTask() throws IOException {
+    BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
+
+    int id = getIdFromUser(read);
     Correction correction = readCorrection();
-    while(correction != Correction.FINISH) {
+
+    while (correction != Correction.FINISH) {
       switch (correction) {
         case CHANGE_TITLE -> changeTitleInTask(id, read);
         case CHANGE_HOURS -> changeHoursInTask(id, read);
@@ -89,10 +98,11 @@ public class ToDoList {
 
       if (!current.containsKey(id)) {
         correction = Correction.FINISH;
+        checkList();
         continue;
       }
 
-      System.out.println("If you want to continue fixing this task, enter next command!");
+      System.out.println("If you want to continue with this task, enter next command!");
       System.out.println("When you done, enter FINISH");
       correction = readCorrection();
     }
@@ -103,18 +113,21 @@ public class ToDoList {
     System.out.print("Please, enter new title:");
     String newTitle = read.readLine();
     current.get(id).setTaskTitle(newTitle);
+    checkList();
   }
 
   private void changeHoursInTask(Integer id, BufferedReader read) throws IOException {
     System.out.print("Please, enter new hours:");
     int temp = Integer.parseInt(read.readLine());
     current.get(id).setHours(temp);
+    checkList();
   }
 
   private void changeMinutesInTask(Integer id, BufferedReader read) throws IOException {
     System.out.print("Please, enter new minutes:");
     int temp = Integer.parseInt(read.readLine());
     current.get(id).setMinutes(temp);
+    checkList();
   }
 
   private void deleteTask(int id) {
