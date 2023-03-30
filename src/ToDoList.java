@@ -5,12 +5,11 @@ package src;
 3. Дописать try-catch, enum, while(true) где нужно
 4. Попытаться разделить программу на разные классы
 5. Написать Unit-test для своих классов
+6. Совершенствование: таск-ид трекер на моей стороне сделать
  */
 
-import java.io.BufferedReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class ToDoList {
@@ -213,20 +212,33 @@ public class ToDoList {
     System.out.println("For previous menu enter 'FINISH'");
   }
 
-  //метод, вызываемыйе в мейн, экспорт данных в файл
+  //Экспорт данных в файл
   //Todo записать данные в отсортированном формате, добавить текущую дату
   public void exportTaskList() throws IOException {
+    try {
+      FileWriter ToDoList = new FileWriter("res/ToDoList.txt", true);
 
-    FileWriter ToDoList = new FileWriter("res/ToDoList.txt", true);
+      for (Map.Entry<Integer, RegularTask> paar : current.entrySet()) {
+        String forPrint =
+            paar.getValue().getTaskId() + ". Task " + paar.getValue().getTaskTitle() +
+                ", (" + paar.getValue().getHours() + "h, " + paar.getValue().getMinutes() + "min)" +
+                ".\n";
 
-    for (Map.Entry<Integer, RegularTask> paar : current.entrySet()) {
+        ToDoList.write(data());
+        ToDoList.write("\n");
+        ToDoList.write(forPrint);
 
-      String forPrint = paar.getValue().getTaskId() + " " + paar.getValue().getTaskTitle() + " " +
-          paar.getValue().getHours() + "h, " + paar.getValue().getMinutes() + "min.\n";
-
-      ToDoList.write(forPrint);
-
+        ToDoList.close();
+      }
+    } catch (FileNotFoundException | NullPointerException e) {
+      System.err.println("File do not found, please, check if 'res' directory exist. " + e);
     }
-    ToDoList.close();
+  }
+
+  private String data() {
+    Date todayTime = new Date();
+    SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    String currentTime = formater.format(todayTime);
+    return currentTime;
   }
 }
