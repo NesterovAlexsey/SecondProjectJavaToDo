@@ -2,10 +2,9 @@ package src;
 /* План моей работы:
 +1. Написать минимально работающий функционал для сшивки по всем методам
 +2. Сшиться с ребятами, первая версия рабочей программы
-3. Дописать try-catch, enum, while(true) где нужно
-4. Попытаться разделить программу на разные классы
++3. Дописать try-catch, enum, while(true) где нужно
++4. Попытаться разделить программу на разные классы
 5. Написать Unit-test для своих классов
-6. Совершенствование: таск-ид трекер на моей стороне сделать
  */
 
 import java.io.*;
@@ -218,18 +217,17 @@ public class ToDoList {
     try {
       FileWriter ToDoList = new FileWriter("res/ToDoList.txt", true);
 
+      ToDoList.write(data() + "\n");
       for (Map.Entry<Integer, RegularTask> paar : current.entrySet()) {
         String forPrint =
             paar.getValue().getTaskId() + ". Task " + paar.getValue().getTaskTitle() +
                 ", (" + paar.getValue().getHours() + "h, " + paar.getValue().getMinutes() + "min)" +
                 ".\n";
-
-        ToDoList.write(data());
-        ToDoList.write("\n");
         ToDoList.write(forPrint);
+      }
 
         ToDoList.close();
-      }
+
     } catch (FileNotFoundException | NullPointerException e) {
       System.err.println("File do not found, please, check if 'res' directory exist. " + e);
     }
