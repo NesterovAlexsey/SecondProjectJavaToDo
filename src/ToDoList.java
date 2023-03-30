@@ -67,20 +67,29 @@ public class ToDoList {
     BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
 
     System.out.print("Please, enter the task number:");
-    int id = Integer.parseInt(read.readLine());
-    if (!current.containsKey(id)){
+
+    int id = 0;
+    try {
+      id = Integer.parseInt(read.readLine());
+    } catch (NumberFormatException e) {
+      System.err.println("Incorrect id number, should be Integer! " + e);
+    }
+    if (!current.containsKey(id)) {
       throw new IllegalArgumentException("There is NO task with such id");
     }
 
-
     Correction correction = readCorrection();
-
-    switch (correction) {
-      case CHANGE_TITLE -> changeTitleInTask(id, read);
-      case CHANGE_HOURS -> changeHoursInTask(id, read);
-      case CHANGE_MINUTES -> changeMinutesInTask(id, read);
-      case DELETE_TASK -> deleteTask(id);
-      case FINISH -> checkList(); //todo усовершенствовать вариант финиш
+    while(correction != Correction.FINISH) {
+      switch (correction) {
+        case CHANGE_TITLE -> changeTitleInTask(id, read);
+        case CHANGE_HOURS -> changeHoursInTask(id, read);
+        case CHANGE_MINUTES -> changeMinutesInTask(id, read);
+        case DELETE_TASK -> deleteTask(id);
+        case FINISH -> checkList(); //todo усовершенствовать вариант финиш
+      }
+      System.out.println("If you want to continue fixing this task, enter next command!");
+      System.out.println("When you done, enter FINISH");
+      correction = readCorrection();
     }
   }
 
@@ -119,8 +128,8 @@ public class ToDoList {
       try {
         result = Correction.valueOf(correction);
       } catch (IllegalArgumentException e) {
-        System.out.println("Некорректная команда: " + correction);
-        System.out.println("Введите корректную команду: ");
+        System.out.println("Incorrect command: " + correction);
+        System.out.println("Please, enter correct one: ");
         correction = br.readLine().toUpperCase();
       }
     }
