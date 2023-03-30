@@ -41,13 +41,13 @@ public class ToDoList {
     return listToDo;
   }
 
-  //метод, вызываемыйе в мейн, добавить задачу в текущий список дел
+  //Новая задача
   public void newTask(RegularTask task) {
     current.put(task.getTaskId(), task);
     checkList();
   }
 
-  //метод, вызываемыйе в мейн
+  //Проверка списка
   public void checkList() {
     List<Map.Entry<Integer, RegularTask>> listOfTaskWithId = listToDo();
     listOfTaskWithId.sort(new idComparator());
@@ -55,13 +55,13 @@ public class ToDoList {
   }
 
   private void printToDoList(List<Map.Entry<Integer, RegularTask>> listOfTaskWithId) {
-    System.out.println("");
+    System.out.println();
     System.out.println("======= My ToDo List ======");
     for (Map.Entry<Integer, RegularTask> paar : listOfTaskWithId) {
       RegularTask temp = paar.getValue();
       System.out.println(temp);
     }
-    System.out.println("");
+    System.out.println();
   }
 
   private int getIdFromUser(BufferedReader read) throws IOException {
@@ -81,7 +81,7 @@ public class ToDoList {
     return id;
   }
 
-  //метод, вызываемыйе в мейн, корректировка задачи
+  //Корректировка задачи
   public void correctTask() throws IOException {
     BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
 
@@ -186,26 +186,31 @@ public class ToDoList {
     }
   }
 
-  //метод, вызываемыйе в мейн, сортировка задач
-  //Todo try-catch, enum
+  //Сортировка задач
   public void sortTasks() throws IOException {
     BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
     List<Map.Entry<Integer, RegularTask>> listOfTaskWithTime = listToDo();
 
-    System.out.println("" +
-        "Вы можете отсортировать задачи по номеру задачи (id), или по продолжительности задачи " +
-        "(time): ");
-    String sortType = read.readLine();
+    printSortTaskMenu();
+    String sortType = read.readLine().toUpperCase();
 
-    switch (sortType) {
-      case ("id"):
-        checkList();
-        break;
-      case ("time"):
-        listOfTaskWithTime.sort(new timeComparator());
-        printToDoList(listOfTaskWithTime);
+    while (!sortType.equals("FINISH")) {
+      switch (sortType) {
+        case ("ID") -> checkList();
+        case ("TIME") -> {
+          listOfTaskWithTime.sort(new timeComparator());
+          printToDoList(listOfTaskWithTime);
+        }
+      }
+      printSortTaskMenu();
+      sortType = read.readLine().toUpperCase();
     }
+  }
 
+  private static void printSortTaskMenu() {
+    System.out.println("For sort TODO list with id enter 'ID'");
+    System.out.println("For sort TODO list with time enter 'TIME'");
+    System.out.println("For previous menu enter 'FINISH'");
   }
 
   //метод, вызываемыйе в мейн, экспорт данных в файл
