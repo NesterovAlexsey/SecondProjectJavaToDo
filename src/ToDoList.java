@@ -8,7 +8,6 @@ import java.util.*;
 
 public class ToDoList {
 
-  // Блок методов к Енум
   enum Correction {
     CHANGE_TITLE, //коррекция название
     CHANGE_HOURS, // коррекция часов
@@ -27,29 +26,24 @@ public class ToDoList {
     corrections.add(Correction.FINISH);
   }
 
-  private void printMenu() {
-    System.out.println();
-    System.out.println("Possible updates: ");
-    for (Correction correction : corrections) {
-      System.out.println(correction);
-    }
-  }
-
   private final Map<Integer, RegularTask> current = new HashMap<>();
 
-  //метод, вызываемыйе в мейн
-  public void newTask(RegularTask task) { //добавить задачу в текущий список дел
+  private List<Map.Entry<Integer, RegularTask>> listToDo() {
+    List<Map.Entry<Integer, RegularTask>> listToDo = new ArrayList<>();
+    listToDo.addAll(current.entrySet());
+    return listToDo;
+  }
+
+  //метод, вызываемыйе в мейн, добавить задачу в текущий список дел
+  public void newTask(RegularTask task) {
     current.put(task.getTaskId(), task);
     checkList();
   }
 
   //метод, вызываемыйе в мейн
   public void checkList() { //показать экран
-    List<Map.Entry<Integer, RegularTask>> listOfTaskWithId = new ArrayList<>();
-
-    listOfTaskWithId.addAll(current.entrySet());
+    List<Map.Entry<Integer, RegularTask>> listOfTaskWithId = listToDo();
     listOfTaskWithId.sort(new idComparator());
-
     printToDoList(listOfTaskWithId);
   }
 
@@ -61,6 +55,7 @@ public class ToDoList {
   }
 
   //метод, вызываемыйе в мейн
+  //todo доделать
   public void correctTask() throws IOException { //корректировать задачу
     BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
 
@@ -123,14 +118,23 @@ public class ToDoList {
     return result;
   }
 
-  //метод, вызываемыйе в мейн
-  public void sortTasks() { //сортировать задачи
-    //Todo создать отдельный Comparator, здесь вызвать
+  private void printMenu() {
+    System.out.println();
+    System.out.println("Список возможных корректировок: ");
+    for (Correction correction : corrections) {
+      System.out.println(correction);
+    }
   }
 
   //метод, вызываемыйе в мейн
-  public void exportTaskList() throws IOException { // экспортировать задачи в файл
-    //todo записать дату в файл, записать мапу в нужном формате, закрыть файл
+  //Todo создать отдельный Comparator, здесь вызвать
+  public void sortTasks() { //сортировать задачи
+  }
+
+  //метод, вызываемыйе в мейн, экспорт данных в файл
+  //Todo записать данные в отсортированном формате
+  public void exportTaskList() throws IOException {
+
     FileWriter ToDoList = new FileWriter("res/ToDoList.txt", true);
 
     for (Map.Entry<Integer, RegularTask> paar : current.entrySet()) {
