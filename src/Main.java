@@ -32,20 +32,20 @@ public class Main {
           return command;
         }
       }
-      throw new IllegalArgumentException("Команды с номером [" + number + "] не существует");
+      throw new IllegalArgumentException("Command with number [" + number + "] does not exist");
     }
   }
 
   private static final Map<Command, String> commands = new HashMap<>();
 
   static {
-    commands.put(Command.HELP, "[9] Список команд");
-    commands.put(Command.NEW_LIST, "[1] Новая запись");
-    commands.put(Command.CHECK_LIST, "[2] Проверить запись");
-    commands.put(Command.CORRECT_LIST, "[3] Править запись");
-    commands.put(Command.SORT_LIST, "[4] Сортировать записи");
-    commands.put(Command.EXPORT_LIST, "[5] Экспортировать запись");
-    commands.put(Command.EXIT, "[0] ВЫХОД");
+    commands.put(Command.HELP, "[9]: List of commands");
+    commands.put(Command.NEW_LIST, "[1]: New task");
+    commands.put(Command.CHECK_LIST, "[2]: Check task");
+    commands.put(Command.CORRECT_LIST, "[3]: Edit task");
+    commands.put(Command.SORT_LIST, "[4]: Sort task");
+    commands.put(Command.EXPORT_LIST, "[5]: Export task");
+    commands.put(Command.EXIT, "[0]: EXIT");
   }
 
   public static RegularTask createRegularTask() throws IOException {
@@ -57,31 +57,31 @@ public class Main {
     boolean validInput = false;
     while (!validInput) {
       try {
-        System.out.println("Введите номер задачи:");
+        System.out.println("Enter task number:");
         taskId = Integer.parseInt(br.readLine());
         if (taskId < 0) {
-          throw new IllegalArgumentException("Номер задачи должен быть положительным!"
-                  + "Вы ввели [" + taskId + "]");
+          throw new IllegalArgumentException("The task number cannot be negative!"
+                  + "you entered [" + taskId + "]");
         }
-        System.out.println("Введите количество часов: ");
+        System.out.println("Enter the number of hours: ");
         hours = Integer.parseInt(br.readLine());
         if (hours < 0) {
-          throw new IllegalArgumentException("Кол-во часов должно быть положительным!"
-                  + "Вы ввели [" + hours + "]");
+          throw new IllegalArgumentException("The number of hours cannot be negative.!"
+                  + "you entered [" + hours + "]");
         }
-        System.out.println("Введите количество минут:");
+        System.out.println("Enter the number of minutes:");
         minutes = Integer.parseInt(br.readLine());
         if (minutes < 0) {
-          throw new IllegalArgumentException("Кол-во минут должно быть положительным!"
-                  + "Вы ввели [" + minutes + "]");
+          throw new IllegalArgumentException("The number of minutes cannot be negative!"
+                  + "you entered [" + minutes + "]");
         }
-        System.out.println("Введите название:");
+        System.out.println("Enter title:");
         taskTitle = br.readLine();
 
         validInput = true;
       } catch (IllegalArgumentException e) {
-        System.out.println("Ошибка: " + e.getMessage());
-        System.out.println("Введите данные корректно!");
+        System.out.println("Error: " + e.getMessage());
+        System.out.println("Enter the data correctly!");
       }
     }
 
@@ -106,14 +106,14 @@ public class Main {
       }
       command = readCommand();
     }
-    System.out.println("До свиданья!");
+    System.out.println("See you!");
   }
 
   public static void printMenu() {
     System.out.println();
-    System.out.println("Список Команд: ");
+    System.out.println("List of commands: ");
     for (Command command : commands.keySet()) {
-      System.out.printf("- %s: %s%n", command, commands.get(command));
+      System.out.printf("- %s %s%n", command, commands.get(command));
     }
   }
 
@@ -121,7 +121,7 @@ public class Main {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     printMenu();
-    System.out.println("Введите название или номер команды: ");
+    System.out.println("Enter the name or number of the command: ");
     String commandInput = br.readLine().toUpperCase();
 
     Command result = null;
@@ -133,13 +133,13 @@ public class Main {
         try {
           result = Command.valueOf(commandInput);
         } catch (IllegalArgumentException exception) {
-          System.out.println("Некорректная команда: " + commandInput);
+          System.out.println(" Incorrect command: " + commandInput);
         }
       } catch (IllegalArgumentException e) {
-        System.out.println("Некорректная команда: " + commandInput);
+        System.out.println(" Incorrect command: " + commandInput);
       }
       if (result == null) {
-        System.out.println("Введите корректную команду: ");
+        System.out.println("Enter a valid command: ");
         commandInput = br.readLine().toUpperCase();
       }
     }
