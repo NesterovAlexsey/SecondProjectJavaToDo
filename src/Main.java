@@ -52,7 +52,7 @@ public class Main {
     sortedCommands.sort(new CommandComparator());
 
     for (Map.Entry<Command, String> entry : sortedCommands) {
-      System.out.println(entry.getKey() + ": " + entry.getValue());
+      System.out.println(entry.getValue() + ": " + entry.getKey());
     }
   }
 
