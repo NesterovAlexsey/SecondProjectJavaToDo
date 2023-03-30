@@ -65,12 +65,7 @@ public class Main {
     boolean validInput = false;
     while (!validInput) {
       try {
-        System.out.print("Enter task number: ");
-        taskId = Integer.parseInt(br.readLine());
-        if (taskId < 0) {
-          throw new IllegalArgumentException("The task number cannot be negative!"
-                  + "you entered [" + taskId + "]");
-        }
+        ++taskId;
         System.out.print("Enter the number of hours: ");
         hours = Integer.parseInt(br.readLine());
         if (hours < 0) {
@@ -85,7 +80,7 @@ public class Main {
         }
         System.out.print("Enter title: ");
         taskTitle = br.readLine();
-         System.out.println();
+        System.out.println();
 
         validInput = true;
       } catch (IllegalArgumentException e) {
