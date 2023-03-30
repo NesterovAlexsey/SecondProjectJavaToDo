@@ -93,6 +93,7 @@ public class Main {
 
     Command command = readCommand();
     while (command != Command.EXIT) {
+      try {
       switch (command) {
         case HELP -> printMenu();
         case NEW_LIST -> {
@@ -103,6 +104,10 @@ public class Main {
         case CORRECT_LIST -> currentToDoList.correctTask();
         case SORT_LIST -> currentToDoList.sortTasks();
         case EXPORT_LIST -> currentToDoList.exportTaskList();
+      }
+      } catch (IllegalArgumentException e) {
+        System.out.println("Error: " + e.getMessage());
+        System.out.println("Enter the data correctly!");
       }
       command = readCommand();
     }
