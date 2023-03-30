@@ -85,8 +85,13 @@ public class ToDoList {
         case CHANGE_HOURS -> changeHoursInTask(id, read);
         case CHANGE_MINUTES -> changeMinutesInTask(id, read);
         case DELETE_TASK -> deleteTask(id);
-        case FINISH -> checkList(); //todo усовершенствовать вариант финиш
       }
+
+      if (!current.containsKey(id)) {
+        correction = Correction.FINISH;
+        continue;
+      }
+
       System.out.println("If you want to continue fixing this task, enter next command!");
       System.out.println("When you done, enter FINISH");
       correction = readCorrection();
