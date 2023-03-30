@@ -127,10 +127,10 @@ public class ToDoList {
   }
 
   //метод, вызываемыйе в мейн, сортировка задач
-  //Todo создать отдельный Comparator, здесь вызвать, try-catch
+  //Todo try-catch, enum
   public void sortTasks() throws IOException {
     BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
-    List<Map.Entry<Integer, RegularTask>> listOfTaskWithId = listToDo();
+    List<Map.Entry<Integer, RegularTask>> listOfTaskWithTime = listToDo();
 
     System.out.println("" +
         "Вы можете отсортировать задачи по номеру задачи (id), или по продолжительности задачи " +
@@ -138,8 +138,12 @@ public class ToDoList {
     String sortType = read.readLine();
 
     switch (sortType) {
-      case("id") : checkList();
+      case("id") :
+        checkList();
+        break;
       case("time") :
+        listOfTaskWithTime.sort(new timeComparator());
+        printToDoList(listOfTaskWithTime);
     }
 
   }
