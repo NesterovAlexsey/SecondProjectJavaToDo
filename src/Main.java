@@ -3,8 +3,7 @@ package src;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Main {
 
@@ -48,6 +47,15 @@ public class Main {
     commands.put(Command.EXIT, "[0]: EXIT");
   }
 
+  public static void pintSortedCommands() {
+    List<Map.Entry<Command, String>> sortedCommands = new ArrayList<>(commands.entrySet());
+    sortedCommands.sort(new CommandComparator());
+
+    for (Map.Entry<Command, String> entry : sortedCommands) {
+      System.out.println(entry.getKey() + ": " + entry.getValue());
+    }
+  }
+
   public static RegularTask createRegularTask() throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     int taskId = 0;
@@ -89,22 +97,23 @@ public class Main {
   }
 
   public static void main(String[] args) throws IOException {
+
     ToDoList currentToDoList = new ToDoList();
 
     Command command = readCommand();
     while (command != Command.EXIT) {
       try {
-      switch (command) {
-        case HELP -> printMenu();
-        case NEW_LIST -> {
-          RegularTask testTask = createRegularTask();
-          currentToDoList.newTask(testTask);
+        switch (command) {
+          case HELP -> printMenu();
+          case NEW_LIST -> {
+            RegularTask testTask = createRegularTask();
+            currentToDoList.newTask(testTask);
+          }
+          case CHECK_LIST -> currentToDoList.checkList();
+          case CORRECT_LIST -> currentToDoList.correctTask();
+          case SORT_LIST -> currentToDoList.sortTasks();
+          case EXPORT_LIST -> currentToDoList.exportTaskList();
         }
-        case CHECK_LIST -> currentToDoList.checkList();
-        case CORRECT_LIST -> currentToDoList.correctTask();
-        case SORT_LIST -> currentToDoList.sortTasks();
-        case EXPORT_LIST -> currentToDoList.exportTaskList();
-      }
       } catch (IllegalArgumentException e) {
         System.out.println("Error: " + e.getMessage());
         System.out.println("Enter the data correctly!");
