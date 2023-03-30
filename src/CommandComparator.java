@@ -8,6 +8,6 @@ public class CommandComparator implements Comparator<Map.Entry<Main.Command, Str
 
   @Override
   public int compare(Map.Entry<Main.Command, String> o1, Map.Entry<Main.Command, String> o2) {
-    return 0;
+    return o1.getValue().compareTo(o2.getValue());
   }
 }

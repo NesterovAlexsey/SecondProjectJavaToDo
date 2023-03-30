@@ -97,7 +97,6 @@ public class Main {
   }
 
   public static void main(String[] args) throws IOException {
-
     ToDoList currentToDoList = new ToDoList();
 
     Command command = readCommand();
@@ -123,12 +122,16 @@ public class Main {
     System.out.println("See you!");
   }
 
+
+
   public static void printMenu() {
     System.out.println();
+    pintSortedCommands();
+    /*
     System.out.println("List of commands: ");
     for (Command command : commands.keySet()) {
       System.out.printf("- %s %s%n", command, commands.get(command));
-    }
+    }*/
   }
 
   public static Command readCommand() throws IOException {
