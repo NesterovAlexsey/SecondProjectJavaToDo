@@ -1,4 +1,11 @@
 package src;
+/* План моей работы:
++1. Написать минимально работающий функционал для сшивки по всем методам
++2. Сшиться с ребятами, первая версия рабочей программы
+3. Дописать try-catch, enum, while(true) где нужно
+4. Попытаться разделить программу на разные классы
+5. Написать Unit-test для своих классов
+ */
 
 import java.io.BufferedReader;
 import java.io.FileWriter;
@@ -41,7 +48,7 @@ public class ToDoList {
   }
 
   //метод, вызываемыйе в мейн
-  public void checkList() { //показать экран
+  public void checkList() {
     List<Map.Entry<Integer, RegularTask>> listOfTaskWithId = listToDo();
     listOfTaskWithId.sort(new idComparator());
     printToDoList(listOfTaskWithId);
@@ -54,13 +61,17 @@ public class ToDoList {
     }
   }
 
-  //метод, вызываемыйе в мейн
+  //метод, вызываемыйе в мейн, корректировка задачи
   //todo доделать
   public void correctTask() throws IOException { //корректировать задачу
     BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
 
     System.out.print("Please, enter the task number:");
-    int id = Integer.parseInt(read.readLine()); //todo словить ошибки ввода
+    int id = Integer.parseInt(read.readLine());
+    if (!current.containsKey(id)){
+      throw new IllegalArgumentException("There is NO task with such id");
+    }
+
 
     Correction correction = readCorrection();
 
@@ -138,10 +149,10 @@ public class ToDoList {
     String sortType = read.readLine();
 
     switch (sortType) {
-      case("id") :
+      case ("id"):
         checkList();
         break;
-      case("time") :
+      case ("time"):
         listOfTaskWithTime.sort(new timeComparator());
         printToDoList(listOfTaskWithTime);
     }
