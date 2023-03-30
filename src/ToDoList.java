@@ -108,24 +108,46 @@ public class ToDoList {
     }
   }
 
-  //todo - словить ошибки у методов коррекции
   private void changeTitleInTask(Integer id, BufferedReader read) throws IOException {
-    System.out.print("Please, enter new title:");
+    System.out.print("Please, enter new title: ");
     String newTitle = read.readLine();
+    if (newTitle.isEmpty()) {
+      throw new IllegalArgumentException("Task title couldn't be empty");
+    }
     current.get(id).setTaskTitle(newTitle);
     checkList();
   }
 
   private void changeHoursInTask(Integer id, BufferedReader read) throws IOException {
-    System.out.print("Please, enter new hours:");
-    int temp = Integer.parseInt(read.readLine());
+    System.out.print("Please, enter new hours: ");
+    int temp;
+
+    try {
+      temp = Integer.parseInt(read.readLine());
+    } catch (NumberFormatException e) {
+      throw new IllegalArgumentException("Parameter Hours should be Integer!");
+    }
+    if (temp < 0) {
+      throw new IllegalArgumentException("Parameter Hours should be NOT negative!");
+    }
+
     current.get(id).setHours(temp);
     checkList();
   }
 
   private void changeMinutesInTask(Integer id, BufferedReader read) throws IOException {
-    System.out.print("Please, enter new minutes:");
-    int temp = Integer.parseInt(read.readLine());
+    System.out.print("Please, enter new minutes: ");
+    int temp;
+
+    try {
+      temp = Integer.parseInt(read.readLine());
+    } catch (NumberFormatException e) {
+      throw new IllegalArgumentException("Parameter Minutes should be Integer!");
+    }
+    if (temp < 0) {
+      throw new IllegalArgumentException("Parameter Minutes should be NOT negative!");
+    }
+
     current.get(id).setMinutes(temp);
     checkList();
   }
@@ -138,7 +160,7 @@ public class ToDoList {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     printMenu();
-    System.out.println("What do you want to change?");
+    System.out.print("What do you want to change? ");
     String correction = br.readLine().toUpperCase();
 
     Correction result = null;
@@ -158,7 +180,7 @@ public class ToDoList {
 
   private void printMenu() {
     System.out.println();
-    System.out.println("Список возможных корректировок: ");
+    System.out.println("List of possible corrections: ");
     for (Correction correction : corrections) {
       System.out.println(correction);
     }
