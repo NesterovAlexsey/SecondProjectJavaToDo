@@ -38,13 +38,13 @@ public class Main {
   private static final Map<Command, String> commands = new HashMap<>();
 
   static {
-    commands.put(Command.HELP, "[9]: List of commands");
-    commands.put(Command.NEW_LIST, "[1]: New task");
-    commands.put(Command.CHECK_LIST, "[2]: Check task");
-    commands.put(Command.CORRECT_LIST, "[3]: Edit task");
-    commands.put(Command.SORT_LIST, "[4]: Sort task");
-    commands.put(Command.EXPORT_LIST, "[5]: Export task");
-    commands.put(Command.EXIT, "[0]: EXIT");
+    commands.put(Command.HELP, "[9] List of commands, txt: ");
+    commands.put(Command.NEW_LIST, "[1] New task, txt: ");
+    commands.put(Command.CHECK_LIST, "[2] Check task, txt: ");
+    commands.put(Command.CORRECT_LIST, "[3] Edit task, txt: ");
+    commands.put(Command.SORT_LIST, "[4] Sort task, txt: ");
+    commands.put(Command.EXPORT_LIST, "[5] Export task, txt: ");
+    commands.put(Command.EXIT, "[0] EXIT, txt: ");
   }
 
   public static void pintSortedCommands() {
@@ -52,7 +52,7 @@ public class Main {
     sortedCommands.sort(new CommandComparator());
 
     for (Map.Entry<Command, String> entry : sortedCommands) {
-      System.out.println(entry.getValue() + ": " + entry.getKey());
+      System.out.println(entry.getValue() + entry.getKey());
     }
   }
 
@@ -65,26 +65,27 @@ public class Main {
     boolean validInput = false;
     while (!validInput) {
       try {
-        System.out.println("Enter task number:");
+        System.out.print("Enter task number: ");
         taskId = Integer.parseInt(br.readLine());
         if (taskId < 0) {
           throw new IllegalArgumentException("The task number cannot be negative!"
                   + "you entered [" + taskId + "]");
         }
-        System.out.println("Enter the number of hours: ");
+        System.out.print("Enter the number of hours: ");
         hours = Integer.parseInt(br.readLine());
         if (hours < 0) {
           throw new IllegalArgumentException("The number of hours cannot be negative.!"
                   + "you entered [" + hours + "]");
         }
-        System.out.println("Enter the number of minutes:");
+        System.out.print("Enter the number of minutes: ");
         minutes = Integer.parseInt(br.readLine());
         if (minutes < 0) {
           throw new IllegalArgumentException("The number of minutes cannot be negative!"
                   + "you entered [" + minutes + "]");
         }
-        System.out.println("Enter title:");
+        System.out.print("Enter title: ");
         taskTitle = br.readLine();
+         System.out.println();
 
         validInput = true;
       } catch (IllegalArgumentException e) {
@@ -97,13 +98,17 @@ public class Main {
   }
 
   public static void main(String[] args) throws IOException {
+    System.out.println();
+    System.out.println(" ==== MENU ====");
+
+    pintSortedCommands();
     ToDoList currentToDoList = new ToDoList();
 
     Command command = readCommand();
     while (command != Command.EXIT) {
       try {
         switch (command) {
-          case HELP -> printMenu();
+          case HELP -> pintSortedCommands();
           case NEW_LIST -> {
             RegularTask testTask = createRegularTask();
             currentToDoList.newTask(testTask);
@@ -122,22 +127,9 @@ public class Main {
     System.out.println("See you!");
   }
 
-
-
-  public static void printMenu() {
-    System.out.println();
-    pintSortedCommands();
-    /*
-    System.out.println("List of commands: ");
-    for (Command command : commands.keySet()) {
-      System.out.printf("- %s %s%n", command, commands.get(command));
-    }*/
-  }
-
   public static Command readCommand() throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-    printMenu();
+    System.out.println();
     System.out.println("Enter the name or number of the command: ");
     String commandInput = br.readLine().toUpperCase();
 
