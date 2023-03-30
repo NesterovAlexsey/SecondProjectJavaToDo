@@ -126,13 +126,26 @@ public class ToDoList {
     }
   }
 
-  //метод, вызываемыйе в мейн
-  //Todo создать отдельный Comparator, здесь вызвать
-  public void sortTasks() { //сортировать задачи
+  //метод, вызываемыйе в мейн, сортировка задач
+  //Todo создать отдельный Comparator, здесь вызвать, try-catch
+  public void sortTasks() throws IOException {
+    BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
+    List<Map.Entry<Integer, RegularTask>> listOfTaskWithId = listToDo();
+
+    System.out.println("" +
+        "Вы можете отсортировать задачи по номеру задачи (id), или по продолжительности задачи " +
+        "(time): ");
+    String sortType = read.readLine();
+
+    switch (sortType) {
+      case("id") : checkList();
+      case("time") :
+    }
+
   }
 
   //метод, вызываемыйе в мейн, экспорт данных в файл
-  //Todo записать данные в отсортированном формате
+  //Todo записать данные в отсортированном формате, добавить текущую дату
   public void exportTaskList() throws IOException {
 
     FileWriter ToDoList = new FileWriter("res/ToDoList.txt", true);
