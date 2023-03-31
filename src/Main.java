@@ -101,7 +101,7 @@ public class Main {
 
   public static void main(String[] args) throws IOException {
     System.out.println();
-    System.out.println(" ==== MENU ====");
+    System.out.println(" ==== Per aspera ad astra ====");
 
     ToDoList currentToDoList = new ToDoList();
 
@@ -133,6 +133,7 @@ public class Main {
     System.out.println();
     System.out.println("List of commands:");
     pintSortedCommands();
+    System.out.println();
     System.out.println("Enter the name or number of the command: ");
     String commandInput = br.readLine().toUpperCase();
 
