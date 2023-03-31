@@ -58,8 +58,8 @@ public class Main {
 
   private static int taskId = 0;
 
-  public static int getNextTaskId() {
-    return ++taskId;
+  public static void getNextTaskId() {
+    ++taskId;
   }
 
   public static RegularTask createRegularTask() throws IOException {
@@ -67,35 +67,44 @@ public class Main {
     /*int taskId = 0;*/
     int hours = 0;
     int minutes = 0;
-    String taskTitle = null;
-    boolean validInput = false;
-    while (!validInput) {
+    String taskTitle;
+
+    System.out.print("Enter title: ");
+    taskTitle = br.readLine();
+    getNextTaskId();
+
+    boolean validHours = false;
+    while (!validHours) {
       try {
-        System.out.print("Enter title: ");
-        taskTitle = br.readLine();
-        getNextTaskId();
         System.out.print("Enter the number of hours: ");
         hours = Integer.parseInt(br.readLine());
         if (hours < 0) {
-          throw new IllegalArgumentException("The number of hours cannot be negative.!"
-                  + "you entered [" + hours + "]");
+          throw new IllegalArgumentException("The number of hours cannot be negative! "
+                  + "You entered: [" + hours + "]");
         }
-        System.out.print("Enter the number of minutes: ");
-        minutes = Integer.parseInt(br.readLine());
-        if (minutes < 0) {
-          throw new IllegalArgumentException("The number of minutes cannot be negative!"
-                  + "you entered [" + minutes + "]");
-        }
-
-        System.out.println();
-
-        validInput = true;
+        validHours = true;
       } catch (IllegalArgumentException e) {
-        System.out.println("Error: " + e.getMessage());
-        System.out.println("Enter the data correctly!");
+        System.out.println("Invalid number: " + e.getMessage());
+        System.out.println("Enter correct number!");
       }
     }
 
+    boolean validMinutes = false;
+    while (!validMinutes) {
+      try {
+        System.out.print("Enter the number of minutes: ");
+        minutes = Integer.parseInt(br.readLine());
+        if (minutes < 0) {
+          throw new IllegalArgumentException("The number of minutes cannot be negative! "
+                  + "You entered: [" + minutes + "]");
+        }
+        validMinutes = true;
+      } catch (IllegalArgumentException e) {
+        System.out.println("Invalid number: " + e.getMessage());
+        System.out.println("Enter correct number!");
+      }
+    }
+    System.out.println();
     return new RegularTask(taskId, hours, minutes, taskTitle);
   }
 
