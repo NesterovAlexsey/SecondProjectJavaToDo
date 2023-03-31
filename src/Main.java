@@ -57,6 +57,7 @@ public class Main {
   }
 
   private static int taskId = 0;
+
   public static int getNextTaskId() {
     return ++taskId;
   }
@@ -102,7 +103,6 @@ public class Main {
     System.out.println();
     System.out.println(" ==== MENU ====");
 
-    pintSortedCommands();
     ToDoList currentToDoList = new ToDoList();
 
     Command command = readCommand();
@@ -131,6 +131,8 @@ public class Main {
   public static Command readCommand() throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     System.out.println();
+    System.out.println("List of commands:");
+    pintSortedCommands();
     System.out.println("Enter the name or number of the command: ");
     String commandInput = br.readLine().toUpperCase();
 
