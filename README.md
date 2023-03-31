@@ -21,7 +21,7 @@ Follow the on-screen prompts
 and use the provided command numbers
 to interact with the application.
 
-##Authors
+## Authors
 
 Alex Nesterov ([@NesterovAlexsey]:(https://github.com/NesterovAlexsey))
 TodoList, timeComparator, timeComparatorTests. idComparator, idComparatorTests
