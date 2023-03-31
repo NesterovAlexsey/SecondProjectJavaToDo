@@ -70,6 +70,8 @@ public class Main {
     boolean validInput = false;
     while (!validInput) {
       try {
+        System.out.print("Enter title: ");
+        taskTitle = br.readLine();
         getNextTaskId();
         System.out.print("Enter the number of hours: ");
         hours = Integer.parseInt(br.readLine());
@@ -83,8 +85,7 @@ public class Main {
           throw new IllegalArgumentException("The number of minutes cannot be negative!"
                   + "you entered [" + minutes + "]");
         }
-        System.out.print("Enter title: ");
-        taskTitle = br.readLine();
+
         System.out.println();
 
         validInput = true;
