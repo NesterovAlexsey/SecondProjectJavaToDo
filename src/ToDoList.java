@@ -212,7 +212,6 @@ public class ToDoList {
   }
 
   //Экспорт данных в файл
-  //Todo записать данные в отсортированном формате, добавить текущую дату
   public void exportTaskList() throws IOException {
     try {
       FileWriter ToDoList = new FileWriter("res/ToDoList.txt", true);
@@ -225,7 +224,7 @@ public class ToDoList {
                 ".\n";
         ToDoList.write(forPrint);
       }
-
+        ToDoList.write("\n");
         ToDoList.close();
 
     } catch (FileNotFoundException | NullPointerException e) {
