@@ -110,7 +110,7 @@ public class Main {
 
   public static void main(String[] args) throws IOException {
     System.out.println();
-    System.out.println(" ==== Per aspera ad astra ====");
+    System.out.println("\033[1;33m ==== Per aspera ad astra ====\033[0m");
 
     ToDoList currentToDoList = new ToDoList();
 
@@ -140,10 +140,10 @@ public class Main {
   public static Command readCommand() throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     System.out.println();
-    System.out.println("List of commands:");
+    System.out.println("\033[1m\033[4mList of commands:\033[0m");
     pintSortedCommands();
     System.out.println();
-    System.out.println("Enter the name or number of the command: ");
+    System.out.println("\033[1m\033[4mEnter the name or number of the command:\033[0m ");
     String commandInput = br.readLine().toUpperCase();
 
     Command result = null;
