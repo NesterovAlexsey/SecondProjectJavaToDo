@@ -64,7 +64,6 @@ public class Main {
 
   public static RegularTask createRegularTask() throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    /*int taskId = 0;*/
     int hours = 0;
     int minutes = 0;
     String taskTitle;
