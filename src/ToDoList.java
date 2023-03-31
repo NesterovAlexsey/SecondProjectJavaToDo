@@ -216,6 +216,7 @@ public class ToDoList {
     try {
       FileWriter ToDoList = new FileWriter("res/ToDoList.txt", true);
 
+      ToDoList.write("\n");
       ToDoList.write(data() + "\n");
       for (Map.Entry<Integer, RegularTask> paar : current.entrySet()) {
         String forPrint =
@@ -224,7 +225,6 @@ public class ToDoList {
                 ".\n";
         ToDoList.write(forPrint);
       }
-        ToDoList.write("\n");
         ToDoList.close();
 
     } catch (FileNotFoundException | NullPointerException e) {
