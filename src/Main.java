@@ -110,7 +110,7 @@ public class Main {
 
   public static void main(String[] args) throws IOException {
     System.out.println();
-    System.out.println("\033[1;33m ==== Per aspera ad astra ====\033[0m");
+    System.out.println("\033[1;33m==== Per aspera ad astra ====\033[0m");
 
     ToDoList currentToDoList = new ToDoList();
 
@@ -134,7 +134,7 @@ public class Main {
       }
       command = readCommand();
     }
-    System.out.println("See you!");
+    System.out.println("\033[1;33mSee you!");
   }
 
   public static Command readCommand() throws IOException {
