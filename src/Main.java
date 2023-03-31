@@ -56,16 +56,21 @@ public class Main {
     }
   }
 
+  private static int taskId = 0;
+  public static int getNextTaskId() {
+    return ++taskId;
+  }
+
   public static RegularTask createRegularTask() throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    int taskId = 0;
+    /*int taskId = 0;*/
     int hours = 0;
     int minutes = 0;
     String taskTitle = null;
     boolean validInput = false;
     while (!validInput) {
       try {
-        ++taskId;
+        getNextTaskId();
         System.out.print("Enter the number of hours: ");
         hours = Integer.parseInt(br.readLine());
         if (hours < 0) {
