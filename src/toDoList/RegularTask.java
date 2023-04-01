@@ -1,4 +1,4 @@
-package src;
+package src.toDoList;
 public class RegularTask {
   private final int taskId;
   private int hours;

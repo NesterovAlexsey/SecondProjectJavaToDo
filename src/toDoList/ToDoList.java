@@ -1,4 +1,4 @@
-package src;
+package src.toDoList;
 /* План моей работы:
 +1. Написать минимально работающий функционал для сшивки по всем методам
 +2. Сшиться с ребятами, первая версия рабочей программы
@@ -12,6 +12,14 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class ToDoList {
+
+  public int getNextTaskId() {
+    return 0;
+  }
+
+  public RegularTask[] getCurrentTasks() {
+    return new RegularTask[1];
+  }
 
   enum Correction {
     CHANGE_TITLE, //коррекция название
@@ -80,7 +88,7 @@ public class ToDoList {
   }
 
   //Корректировка задачи
-  public void correctTask() throws IOException {
+  public void correctTask(int taskId) throws IOException {
     BufferedReader read = new BufferedReader(new InputStreamReader(System.in));
 
     int id = getIdFromUser(read);

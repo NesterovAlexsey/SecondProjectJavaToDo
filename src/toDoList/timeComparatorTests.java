@@ -1,4 +1,4 @@
-package src;
+package src.toDoList;
 
 import org.junit.jupiter.api.Test;
 

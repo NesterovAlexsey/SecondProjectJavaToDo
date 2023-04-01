@@ -1,4 +1,4 @@
-package src;
+package src.toDoList;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -123,7 +123,7 @@ public class Main {
             currentToDoList.newTask(testTask);
           }
           case CHECK_LIST -> currentToDoList.checkList();
-          case CORRECT_LIST -> currentToDoList.correctTask();
+          case CORRECT_LIST -> currentToDoList.correctTask(taskId);
           case SORT_LIST -> currentToDoList.sortTasks();
           case EXPORT_LIST -> currentToDoList.exportTaskList();
         }
